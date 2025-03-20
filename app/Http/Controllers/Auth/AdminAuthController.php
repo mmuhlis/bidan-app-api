@@ -7,6 +7,8 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminAuthController extends Controller
 {
@@ -38,14 +40,42 @@ class AdminAuthController extends Controller
         }
     }
 
+    public function register(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => 'required|email|unique:admins',
+                'password' => 'required|string|min:6|confirmed',
+                'nama_lengkap' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:255',
+                'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            $admin = Admin::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'nama_lengkap' => $request->nama_lengkap,
+                'no_hp' => $request->no_hp,
+                'avatar' => $request->avatar
+            ]);
+
+            $token = $admin->createToken('admin_auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Registrasi berhasil',
+                'admin' => ['id' => $admin->id, 'name' => $admin->name, 'email' => $admin->email],
+                'token' => $token,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Registrasi gagal', 'error' => $e->getMessage()], 400);
+        }
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Keluar berhasil']);
     }
-
-
-
 
 
 

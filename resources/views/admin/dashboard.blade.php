@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid">
-    <h1 class="mb-4">Dashboard</h1>
+<div class="container-fluid mt-4">
+    {{-- <h1 class="mb-4">Dashboard</h1> --}}
 
     <div class="row">
         <!-- Widget Jumlah Bidan -->
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Grafik Statistik -->
-    <div class="row mt-4">
+    {{-- <div class="row mt-4">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <!-- Script Chart.js -->

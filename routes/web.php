@@ -28,6 +28,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     // Logout tetap bisa diakses tanpa middleware `guest`
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::resource('admin', AdminController::class);
 
 
 
@@ -45,6 +46,13 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/data-pasien', [UserController::class, 'index'])->name('data-pasien.index');
     // Route::get('/rekam-medis/{id}/pdf', [RekamMedisController::class, 'generatePDF'])->name('rekam-medis.pdf');
 
+    // Route::get('/admin/profile', [AdminController::class, 'show'])->name('admin.profile'); // Menampilkan profil
+
+    // Route::get('/admin/profile', [AdminController::class, 'showProfile'])->name('admin.profile.profile');
+    Route::get('/admin/profile', [AdminController::class, 'show'])->name('admin.profile.show');
+    Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 
 
@@ -59,31 +67,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
         Route::delete('/{id}', [RekamMedisController::class, 'destroy'])->name('destroy');
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

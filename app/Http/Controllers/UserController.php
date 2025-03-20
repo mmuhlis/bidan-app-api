@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
+use App\Models\RekamMedis;
 use App\Models\Admin;
 
 class UserController extends Controller

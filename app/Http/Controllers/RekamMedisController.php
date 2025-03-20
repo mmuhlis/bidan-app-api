@@ -27,14 +27,57 @@ class RekamMedisController extends Controller
         return view('rekam-medis.index', compact('rekamMedis'));
     }
 
+    //  * Pasien melihat hasil rekam medis miliknya.
+    //  */
     public function getByUser(Request $request)
     {
-        return response()->json([
-            'status' => true,
-            'message' => 'Data rekam medis',
-            'data' => RekamMedis::with(['user', 'admin'])->get()
-        ]);
+        try {
+            $user = Auth::user(); // Ambil user yang login
+
+            $rekamMedis = RekamMedis::where('nik', $user->nik) // Cari berdasarkan NIK
+                ->with('admin') // Menampilkan siapa bidan yang menangani
+                ->get();
+
+            if ($rekamMedis->isEmpty()) {
+                return response()->json([
+                    'message' => 'Tidak ada rekam medis yang ditemukan untuk pengguna ini',
+                ], 404);
+            }
+
+            return response()->json([
+                'message' => 'Rekam medis pasien ditemukan',
+                'rekam_medis' => $rekamMedis,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat mengambil data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+
+    // API untuk Bidan (Admin)
+    public function getAllRekamMedis()
+    {
+        try {
+            $rekamMedis = RekamMedis::with(['admin', 'user'])->get();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Semua rekam medis ditemukan',
+                'rekam_medis' => $rekamMedis,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan saat mengambil data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+
 
 
 

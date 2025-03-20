@@ -36,7 +36,7 @@
                                 <button class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
-                                <form action="{{ route('users.destroy', $admin->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">

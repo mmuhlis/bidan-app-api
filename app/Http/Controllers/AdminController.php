@@ -27,37 +27,6 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('totalBidan', 'totalPasien', 'totalRekamMedis', 'rekamMedisPerBulan'));
     }
 
-    // public function login(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'email' => 'required|email',
-    //             'password' => 'required|string',
-    //         ]);
-
-    //         $admin = Admin::where('email', $request->email)->first();
-
-    //         if (!$admin || !Hash::check($request->password, $admin->password)) {
-    //             throw ValidationException::withMessages(['email' => ['Kredensial salah.']]);
-    //         }
-
-    //         $token = $admin->createToken('admin_auth_token')->plainTextToken;
-
-    //         return response()->json([
-    //             'message' => 'Masuk berhasil',
-    //             'admin' => ['id' => $admin->id, 'name' => $admin->name, 'email' => $admin->email],
-    //             'token' => $token,
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json(['message' => 'Email atau password salah', 'error' => $e->getMessage()], 400);
-    //     }
-    // }
-
-    // public function logout(Request $request)
-    // {
-    //     $request->user()->currentAccessToken()->delete();
-    //     return response()->json(['message' => 'Keluar berhasil']);
-    // }
 
     public function showLoginForm()
     {
@@ -84,14 +53,14 @@ class AdminController extends Controller
         ])->onlyInput('email');
     }
 
-    public function logout(Request $request)
-    {
-        Auth::guard('admin')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    // public function logout(Request $request)
+    // {
+    //     Auth::guard('admin')->logout();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
-    }
+    //     return redirect()->route('admin.login');
+    // }
 
     public function showRegisterForm()
     {
@@ -117,7 +86,87 @@ class AdminController extends Controller
         return redirect()->route('admin.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    public function destroy($id)
+    {
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
 
+        return redirect()->route('data-pengguna.index')->with('success', 'Data Admin berhasil dihapus.');
+    }
+
+    public function edit()
+    {
+        $admin = Auth::guard('admin')->user();
+
+        if (!$admin) {
+            return redirect()->route('admin.login')->with('error', 'Anda harus login terlebih dahulu.');
+        }
+
+        return view('admin.profile.edit', compact('admin'));
+    }
+
+    public function show()
+    {
+        $admin = Auth::guard('admin')->user();
+
+        if (!$admin) {
+            return redirect()->route('admin.login')->with('error', 'Anda harus login terlebih dahulu.');
+        }
+
+        return view('admin.profile.show', compact('admin'));
+    }
+
+
+    // // Menampilkan Profil Admin
+    public function showProfile()
+    {
+        $admin = Auth::user();
+        return view('admin.profile.profile', compact('admin'));
+    }
+
+    // Halaman Edit Profil
+    public function editProfile()
+    {
+        $admin = Auth::user();
+        return view('admin.profile.edit', compact('admin'));
+    }
+
+    // Update Profil
+    public function updateProfile(Request $request)
+    {
+        $admin = Admin::find(Auth::id());
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Admin tidak ditemukan.');
+        }
+
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $admin->id,
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $admin->nama_lengkap = $request->nama_lengkap;
+        $admin->email = $request->email;
+
+        if ($request->filled('password')) {
+            $admin->password = bcrypt($request->password);
+        }
+
+        $admin->save();
+
+        return redirect()->route('admin.profile.show')->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    // Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
+    }
 
 
 
