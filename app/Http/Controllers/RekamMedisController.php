@@ -29,7 +29,7 @@ class RekamMedisController extends Controller
 
     //  * Pasien melihat hasil rekam medis miliknya.
     //  */
-    public function getByUser(Request $request)
+    public function getByUserRekamMedis(Request $request)
     {
         try {
             $user = Auth::user(); // Ambil user yang login

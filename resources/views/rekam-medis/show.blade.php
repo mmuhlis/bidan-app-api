@@ -71,7 +71,7 @@
                         </tr>
                     </table>
 
-                    <div class="text-right">
+                    {{-- <div class="text-right">
                         <a href="{{ route('rekam-medis.edit', $rekam->id) }}" class="btn btn-warning btn-sm">
                             <i class="fas fa-edit"></i> Edit
                         </a>
@@ -82,7 +82,7 @@
                                 <i class="fas fa-trash"></i> Hapus
                             </button>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         @endforeach

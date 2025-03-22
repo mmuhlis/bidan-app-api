@@ -33,9 +33,9 @@
                             <td>{{ $admin->email }}</td>
                             <td>{{ $admin->password }}</td>
                             <td>
-                                <button class="btn btn-warning btn-sm">
+                                {{-- <button class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Edit
-                                </button>
+                                </button> --}}
                                 <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
@@ -75,9 +75,9 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->password }}</td>
                             <td>
-                                <button class="btn btn-warning btn-sm">
+                                {{-- <button class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Edit
-                                </button>
+                                </button> --}}
                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')

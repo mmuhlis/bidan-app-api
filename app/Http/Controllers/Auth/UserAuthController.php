@@ -65,4 +65,49 @@ class UserAuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logout berhasil'], 200);
     }
+
+    public function getPasienById($id)
+    {
+        $pasien = User::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Pasien berhasil diambil',
+            'data' => [
+                'id' => $pasien->id,
+                'nama_lengkap' => $pasien->nama_lengkap,
+                'email' => $pasien->email,
+                'nik' => $pasien->nik,
+                'alamat' => $pasien->alamat,
+                'no_hp' => $pasien->no_hp,
+            ]
+        ], 200);
+    }
+    public function updateProfile(Request $request, $id)
+    {
+        $user = User::find($id); // Ambil data user berdasarkan ID
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User tidak ditemukan'
+            ], 404);
+        }
+
+        // Validasi input
+        $request->validate([
+            'email' => 'email|unique:users,email,' . $id,
+            'nama_lengkap' => 'string|max:255',
+            'nik' => 'numeric|unique:users,nik,' . $id,
+            'alamat' => 'string',
+            'no_hp' => 'string|max:15',
+        ]);
+
+        // Update data
+        $user->update($request->only(['email', 'nama_lengkap', 'nik', 'alamat', 'no_hp']));
+
+        return response()->json([
+            'message' => 'Profil user berhasil diperbarui',
+            'data' => $user
+        ], 200);
+    }
 }

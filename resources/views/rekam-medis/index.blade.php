@@ -35,6 +35,9 @@
                                         </a>
                                         {{-- <a href="{{ route('rekam-medis.pdf', $pasien->id) }}" class="btn btn-danger btn-sm">
                                             <i class="fas fa-file-pdf"></i> Download Laporan PDF
+                                        </a>
+                                        <a href="{{ route('laporan.bulanan', ['bulan' => now()->month, 'tahun' => now()->year]) }}" class="btn btn-primary">
+                                            Download Laporan Bulanan
                                         </a> --}}
                                     </td>
                                 </tr>

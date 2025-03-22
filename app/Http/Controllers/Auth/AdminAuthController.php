@@ -77,6 +77,49 @@ class AdminAuthController extends Controller
         return response()->json(['message' => 'Keluar berhasil']);
     }
 
+    public function getAdminById($id)
+    {
+        $bidan = Admin::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data bidan berhasil diambil',
+            'data' => [
+                'id' => $bidan->id,
+                'nama_lengkap' => $bidan->nama_lengkap,
+                'email' => $bidan->email,
+                'no_hp' => $bidan->no_hp,
+            ]
+        ], 200);
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $bidan = Admin::find($id); // Ambil data bidan berdasarkan ID
+
+        if (!$bidan) {
+            return response()->json([
+                'message' => 'Bidan tidak ditemukan'
+            ], 404);
+        }
+
+        // Validasi data
+        $request->validate([
+            'nama_lengkap' => 'string|max:255',
+            'email' => 'email|unique:admins,email,' . $id,
+            'no_hp' => 'string|max:15',
+        ]);
+
+        // Update data
+        $bidan->update($request->only(['nama_lengkap', 'email', 'no_hp']));
+
+        return response()->json([
+            'message' => 'Profil bidan berhasil diperbarui',
+            'data' => $bidan
+        ], 200);
+    }
+
+
 
 
 
