@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Tambah Rekam Medis | Smart Bidan')
 @section('content')
 <div class="container mt-4">
     <div class="card shadow-sm">

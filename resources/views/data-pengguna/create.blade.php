@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Tambah Akun | Smart Bidan')
 @section('content')
 <div class="container mt-4">
     {{-- <h1 class="mb-4"><i class="fas fa-user-plus"></i> Tambah Akun</h1> --}}

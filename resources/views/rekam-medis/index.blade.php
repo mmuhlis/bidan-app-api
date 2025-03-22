@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('title', 'Rekam Medis | Smart Bidan')
 @section('content')
 <div class="container-fluid mt-4">
     <div class="row">

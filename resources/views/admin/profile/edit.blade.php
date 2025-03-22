@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Edit Profil | Smart Bidan')
 @section('content')
 <div class="container">
     <h2>Edit Profil</h2>

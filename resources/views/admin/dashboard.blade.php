@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Dashboard | Smart Bidan')
 @section('content')
 <div class="container-fluid mt-4">
     {{-- <h1 class="mb-4">Dashboard</h1> --}}

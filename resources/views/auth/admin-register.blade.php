@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 
+@section('title', 'Register Admin | Smart Bidan')
 @section('content')
 <div class="register-box">
     <div class="register-logo">

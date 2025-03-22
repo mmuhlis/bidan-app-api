@@ -31,8 +31,6 @@ class DataPenggunaController extends Controller
         ]);
     }
 
-
-
     public function create()
     {
         return view('data-pengguna.create');

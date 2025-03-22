@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Data Pengguna | Smart Bidan')
 @section('content')
 <div class="container">
     {{-- <h1 class="mb-4"><i class="fas fa-users"></i> Data Pengguna</h1> --}}

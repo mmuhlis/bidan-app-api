@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('title', 'Detail Rekam Medis | Smart Bidan')
 @section('content')
 <div class="container mt-4">
     <h1 class="mb-4">Detail Rekam Medis</h1>

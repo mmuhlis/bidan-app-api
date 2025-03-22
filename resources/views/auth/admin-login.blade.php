@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 
+@section('title', 'Login Admin | Smart Bidan')
 @section('content')
 <div class="login-box">
     <div class="login-logo">

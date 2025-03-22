@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Smart Bidan</title>
+    <title>@yield('title', 'Dashboard | Smart Bidan')</title>
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -89,9 +89,6 @@
 <!-- Bootstrap Bundle (termasuk Popper.js) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-
-
 
 </body>
 </html>
