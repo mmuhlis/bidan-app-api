@@ -2,7 +2,7 @@
     "version": 2,
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.5.0"
+            "runtime": "vercel-php@0.4.0"
         }
     },
     "routes": [
@@ -16,7 +16,6 @@
         }
     ],
     "public": true,
-    "buildCommand": "apt-get update && apt-get install -y libssl1.1 && vite build",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
