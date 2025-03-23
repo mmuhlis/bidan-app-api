@@ -3,7 +3,7 @@
     "framework": null,
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.3.0"
+            "runtime": "docker"
         }
     },
     "buildCommand": "ln -s /usr/lib64/libssl.so.1.1 /usr/lib64/libssl.so.10 || true && vite build",
