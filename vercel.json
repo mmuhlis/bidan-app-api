@@ -3,9 +3,10 @@
     "framework": null,
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.6.0"
+            "runtime": "vercel-php@0.5.0"
         }
     },
+    "buildCommand": "ln -s /usr/lib64/libssl.so.1.1 /usr/lib64/libssl.so.10 || true && vite build",
     "routes": [
         {
             "src": "/build/(.*)",
@@ -17,7 +18,6 @@
         }
     ],
     "public": true,
-    "buildCommand": "vite build",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
