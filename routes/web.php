@@ -8,6 +8,7 @@ use App\Http\Controllers\DataPenggunaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LaporanRekamMedisController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\SkriningKehamilanController;
 
 // Saat akses utama, langsung redirect ke halaman login admin
 Route::get('/', function () {
@@ -48,6 +49,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
     Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    Route::get('/skrining', [SkriningKehamilanController::class, 'index'])->name('admin.skrining.index');
+    Route::get('/skrining/{id}', [SkriningKehamilanController::class, 'show'])->name('admin.skrining.show');
+    Route::get('/admin/skrining/riwayat/{user_id}', [SkriningKehamilanController::class, 'riwayatAdmin'])->name('admin.skrining.riwayat');
+
 
     // Manajemen Rekam Medis
     Route::prefix('rekam-medis')->name('rekam-medis.')->group(function () {

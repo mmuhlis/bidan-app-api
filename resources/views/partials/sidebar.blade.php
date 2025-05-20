@@ -42,6 +42,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.skrining.index') }}" class="nav-link {{ request()->is('data-skrining*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-check"></i>
+                        <p>Data Skrining</p>
+                    </a>
+                </li>
+
                 {{-- <li class="nav-header">PENGATURAN</li>
 
                 <li class="nav-item">
